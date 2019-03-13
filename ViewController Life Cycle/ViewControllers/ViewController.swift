@@ -35,6 +35,11 @@ class ViewController: UIViewController {
         textView.isEditable = false
         let text = messages.joined(separator: "\n")
         textView.text = text
+        
+        if !text.isEmpty {
+            let range = NSRange(location: text.count - 1, length: 1)
+            textView.scrollRangeToVisible(range)
+        }
     }
     
     override func viewDidLoad() {
