@@ -9,10 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    private static var messages = [String]()
 
     @IBOutlet weak var textView: UITextView!
-    
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addMessage()
@@ -28,12 +29,13 @@ class ViewController: UIViewController {
         localCurrentTime.timeStyle = .medium
         localCurrentTime.dateStyle = .none
         let timeString = localCurrentTime.string(from: date)
-        messages.append("\(timeString) \(title ?? ""): \(function)")
+        
+        ViewController.messages.append("\(timeString) \(title ?? ""): \(function)")
     }
     
     func appearMessage() {
         textView.isEditable = false
-        let text = messages.joined(separator: "\n")
+        let text = ViewController.messages.joined(separator: "\n")
         textView.text = text
         
         if !text.isEmpty {
