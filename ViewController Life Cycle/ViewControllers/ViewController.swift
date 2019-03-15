@@ -9,9 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
+
     // MARK: - Properties
-    var delegate: MessageData?
+    private var delegate: MessageData?
 
     // MARK: - Outlets
     @IBOutlet weak var textView: UITextView!

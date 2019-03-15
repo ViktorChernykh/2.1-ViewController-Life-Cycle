@@ -19,12 +19,16 @@ class Message: MessageData {
     static let shared = Message()
     
     // MARK: - Properties
-    private(set) var messages = [String]()
+    private var messages = [String]()
     
     private init() {}
     
     // MARK: - Delegate method
     func addMessage(_ function: String, title: String?) {
+        if function == "" {
+            messages.append("")
+            return
+        }
         let date = Date()
         let localCurrentTime = DateFormatter()
         //        localCurrentTime.timeStyle = .medium
