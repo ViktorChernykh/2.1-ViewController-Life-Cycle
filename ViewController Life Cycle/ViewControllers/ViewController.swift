@@ -10,32 +10,27 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private static var messages = [String]()
+    // MARK: - Properties
+    var delegate: MessageData?
 
+    // MARK: - Outlets
     @IBOutlet weak var textView: UITextView!
 
+    // MARK: - Initialization
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        addMessage()
+        delegate = Message.shared
+        delegate?.addMessage(#function, title: title)
     }
     
     deinit {
-        addMessage()
+        delegate?.addMessage(#function, title: title)
     }
     
-    func addMessage(_ function: String = #function) {
-        let date = Date()
-        let localCurrentTime = DateFormatter()
-        localCurrentTime.timeStyle = .medium
-        localCurrentTime.dateStyle = .none
-        let timeString = localCurrentTime.string(from: date)
-        
-        ViewController.messages.append("\(timeString) \(title ?? ""): \(function)")
-    }
-    
-    func appearMessage() {
+    // MARK: - Private methods
+    private func appearMessage() {
         textView.isEditable = false
-        let text = ViewController.messages.joined(separator: "\n")
+        let text = delegate!.readMessage()
         textView.text = text
         
         if !text.isEmpty {
@@ -44,52 +39,52 @@ class ViewController: UIViewController {
         }
     }
     
+    // MARK: - Life cicles
     override func viewDidLoad() {
         super.viewDidLoad()
-        addMessage()
+        delegate?.addMessage(#function, title: title)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        addMessage()
-
+        delegate?.addMessage(#function, title: title)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        addMessage()
+        delegate?.addMessage(#function, title: title)
         appearMessage()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        addMessage()
+        delegate?.addMessage(#function, title: title)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        addMessage()
+        delegate?.addMessage(#function, title: title)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        addMessage()
-
+        delegate?.addMessage(#function, title: title)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        addMessage()
+        delegate?.addMessage(#function, title: title)
         appearMessage()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        addMessage()
+        delegate?.addMessage(#function, title: title)
     }
     
+    // MARK: - @IBAction
     @IBAction func unwind(segue: UIStoryboardSegue) {
-        addMessage()
+        delegate?.addMessage(#function, title: title)
     }
 }
 
