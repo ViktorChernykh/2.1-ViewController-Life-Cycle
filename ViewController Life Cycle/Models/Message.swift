@@ -23,12 +23,9 @@ class Message: MessageData {
     
     private init() {}
     
-    // MARK: - Delegate method
+    // MARK: - Delegate methods
     func addMessage(_ function: String, title: String?) {
-        if function == "" {
-            messages.append("")
-            return
-        }
+
         let date = Date()
         let localCurrentTime = DateFormatter()
         //        localCurrentTime.timeStyle = .medium
