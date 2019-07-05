@@ -10,11 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    // MARK: - Properties
-    private var delegate: MessageData!
-
     // MARK: - Outlets
     @IBOutlet weak var textView: UITextView!
+
+    // MARK: - Properties
+    private var delegate: MessageData!
 
     // MARK: - Initialization
     required init?(coder aDecoder: NSCoder) {
